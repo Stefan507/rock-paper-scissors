@@ -42,23 +42,34 @@ function PlayRound(playerSelection, computerSelection) {
     }
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i ++) {
-        var playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
-        var computerSelection = getComputerChoice();
-        console.log(playerSelection);
-        console.log(computerSelection);
-        console.log(PlayRound(playerSelection, computerSelection));
-    }
-
-    if (computerScore === playerScore) {
-        return ("The game is a tie")
-    } else if (computerScore > playerScore) {
-        return ("Computer has won")
-    } else {
-        return ("Player has won")
-    }
+function updateScoreDisplay() {
+    content.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
 }
 
-console.log(playGame())
+document.getElementById("rock").addEventListener("click", function() {
+    const result = PlayRound("rock", getComputerChoice());
+    updateScoreDisplay();
+    console.log(result);
+});
 
+document.getElementById("paper").addEventListener("click", function() {
+    const result = PlayRound("paper", getComputerChoice());
+    updateScoreDisplay();
+    console.log(result);
+});
+
+document.getElementById("scissors").addEventListener("click", function() {
+    const result = PlayRound("scissors", getComputerChoice());
+    updateScoreDisplay();
+    console.log(result);
+});
+
+
+const container = document.querySelector("#container");
+
+const content = document.createElement("div");
+content.classList.add("content");
+
+container.appendChild(content);
+
+updateScoreDisplay();
